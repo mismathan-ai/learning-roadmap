@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: 'Syne', system-ui, sans-serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --bg: #f7f7fb;
+  --bg-2: #ffffff;
+  --bg-3: #f0f0f5;
+  --border: rgba(15,15,40,0.10);
+  --border-hover: rgba(15,15,40,0.20);
+  --text: #1a1a2e;
+  --text-muted: #6b6b8a;
+  --accent: #ea6c10;
+  --accent-dim: rgba(249, 115, 22, 0.12);
+  --node-completed: #059669;
+  --node-pending: #9494b8;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(15,15,40,0.18); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(15,15,40,0.30); }
+
+/* ReactFlow overrides */
+.react-flow__background { background: transparent !important; }
+.react-flow__edge-path { stroke: rgba(15,15,40,0.18) !important; stroke-width: 1.5 !important; }
+.react-flow__edge-path.completed { stroke: rgba(5, 150, 105, 0.45) !important; }
+.react-flow__controls { background: var(--bg-2) !important; border: 1px solid var(--border) !important; border-radius: 8px !important; overflow: hidden; }
+.react-flow__controls button { background: transparent !important; border-color: var(--border) !important; color: var(--text-muted) !important; }
+.react-flow__controls button:hover { background: var(--bg-3) !important; color: var(--text) !important; }
+.react-flow__minimap { background: var(--bg-2) !important; border: 1px solid var(--border) !important; border-radius: 8px !important; }
+.react-flow__attribution { display: none !important; }
+.react-flow__node { cursor: pointer; }
+.react-flow__handle { opacity: 0 !important; }
+
+/* Animations */
+@keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+@keyframes slideUp { from { opacity: 0; transform: translateY(12px) } to { opacity: 1; transform: translateY(0) } }
+@keyframes slideRight { from { opacity: 0; transform: translateX(-12px) } to { opacity: 1; transform: translateX(0) } }
+@keyframes scaleIn { from { opacity: 0; transform: scale(0.95) } to { opacity: 1; transform: scale(1) } }
+@keyframes pulse { 0%, 100% { opacity: 0.4 } 50% { opacity: 1 } }
+
+.animate-fade-in { animation: fadeIn 0.3s ease-out both; }
+.animate-slide-up { animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.animate-slide-right { animation: slideRight 0.4s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.animate-scale-in { animation: scaleIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+/* Stagger delays */
+.delay-50 { animation-delay: 50ms; }
+.delay-100 { animation-delay: 100ms; }
+.delay-150 { animation-delay: 150ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #f97316 0%, #fb923c 50%, #fdba74 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glass effect */
+.glass {
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+}
+
+/* Progress bar */
+.progress-bar {
+  height: 3px;
+  background: var(--bg-3);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #f97316, #fb923c);
+  border-radius: 2px;
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.progress-fill.completed {
+  background: linear-gradient(90deg, #059669, #10b981);
+}
+
+.toolbar-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 0.75rem;
+  padding: 0.45rem 0.7rem;
+  font-size: 0.8rem;
+  background: var(--bg-3);
+  color: var(--text);
+  border: 1px solid var(--border);
+  transition: all 160ms ease;
+}
+.toolbar-btn:hover { transform: translateY(-1px); border-color: rgba(249,115,22,.35); }
+
+.word-editor:empty:before {
+  content: attr(data-placeholder);
+  color: #94a3b8;
+  pointer-events: none;
+}
+.word-editor h1 {
+  font-size: 2rem;
+  line-height: 2.5rem;
+  font-weight: 700;
+  margin: 1rem 0 0.75rem;
+}
+.word-editor h2 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+  margin: 0.9rem 0 0.6rem;
+}
+.word-editor p {
+  margin: 0.35rem 0;
+}
+.word-editor ul,
+.word-editor ol {
+  padding-left: 1.6rem;
+  margin: 0.5rem 0;
+}
+.word-editor ul { list-style-type: disc; }
+.word-editor ol { list-style-type: decimal; }
+.word-editor li {
+  margin: 0.2rem 0;
+}
+.word-editor table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.8rem 0;
+}
+.word-editor td,
+.word-editor th {
+  border: 1px solid #cbd5e1;
+  padding: 0.5rem;
+  min-width: 80px;
+}
+.word-editor a {
+  color: #2563eb;
+  text-decoration: underline;
+}
+.word-editor pre {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.75rem;
+  padding: 0.8rem;
+  white-space: pre-wrap;
+  margin: 0.8rem 0;
+}
+@media print {
+  header, aside, .toolbar, button { display: none !important; }
+  .word-editor { min-height: auto !important; padding: 0 !important; }
+}
